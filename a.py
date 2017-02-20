@@ -62,6 +62,11 @@ def hello_world():
 @app.route('/template/<name>')
 def hello(name=None):
     return render_template('templatedetail.html', username=name)
+
+@app.route('/createproject')
+def createproject():
+    name=request.cookies.get('username')
+    return render_template('forms.html', username=name)
     
 @app.route('/template',methods=['GET','POST'])
 def dashboard():
