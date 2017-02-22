@@ -65,8 +65,11 @@ def hello(name=None):
 
 @app.route('/createproject')
 def createproject():
+    posts = []
+    for each in os.listdir(UPLOAD_FOLDER):
+        posts.append(each)
     name=request.cookies.get('username')
-    return render_template('forms.html', username=name)
+    return render_template('forms.html', username=name,posts=posts)
     
 @app.route('/template',methods=['GET','POST'])
 def dashboard():

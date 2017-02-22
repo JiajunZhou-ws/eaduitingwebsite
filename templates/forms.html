@@ -248,13 +248,11 @@
                 <legend>Selects</legend>
                 <div class='form-group'>
                   <label class='control-label'>Single select</label>
-                  <select class='form-control'>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+                  <select id="sort" class='form-control'>
+				  {% for post in posts %}
+					<option>{{post}}</option>
+				{%endfor%}             
+                 </select>
                 </div>
                 <div class='form-group'>
                   <label class='control-label'>Multiple select</label>
@@ -276,6 +274,11 @@
         </div>
       </div>
     </div>
+	<script type="text/javascript">  					
+	$("#sort").change(function(){
+			alert('Selected value: ' + $(this).val());
+	});
+    </script>
     <!-- Footer -->
     <!-- Javascripts -->  
   </body>
