@@ -10,8 +10,11 @@
 	<script src="{{url_for('static', filename='js/jquery-1.9.0.min.js')}}" type="text/javascript"></script>
 	<script src="{{url_for('static', filename='js/jquery-ui.min.js')}}" type="text/javascript"></script>
 	<script src="{{url_for('static', filename='js/modernizr.min.js')}}" type="text/javascript"></script>
+	<script src="{{url_for('static', filename='js/jquery.autocomplete.js')}}" type="text/javascript"></script>
+	<script src="{{url_for('static', filename='js/modernizr.min.js')}}" type="text/javascript"></script>
 	<link href="{{url_for('static', filename='assets/stylesheets/application-a07755f5.css')}}" rel="stylesheet" type="text/css" />
 	<link href="{{url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+	<link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url_for('static', filename='assets/images/favicon.ico')}}" rel="icon" type="image/ico" />
     
   </head>
@@ -137,44 +140,51 @@
           <div class='panel-body'>
             <form>
               <fieldset>
-                <legend>Default Inputs</legend>
+                <legend>创建模板</legend>
                 <div class='form-group'>
-                  <label class='control-label'>Text field</label>
-                  <input class='form-control' placeholder='Enter username' type='text'>
+                  <label class='control-label'>任务区域</label>
+                  <input class='form-control' placeholder='请输入任务区域' type='text'>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Password field</label>
-                  <input class='form-control' placeholder='Enter password' type='password'>
+                  <label class='control-label'>代表处</label>
+                  <input class='form-control' placeholder='请输入代表处' type='text'>
                 </div>
                 <div class='form-group'>
-                  <label class='control-label'>Input field with help</label>
-                  <input class='form-control' placeholder='.help-block'>
-                  <p class='help-block'>Example block-level help text here.</p>
+                  <label class='control-label'>建筑物编号</label>
+                  <input class='form-control' placeholder='请输入建筑物编号'>
                 </div>
-                <div class='form-group'>
-                  <label class='control-label'>Disabled field</label>
-                  <input class='form-control' disabled placeholder='This is field is disabled!'>
+				<div class='form-group'>
+                  <label class='control-label'>站点名称</label>
+                  <input class='form-control' placeholder='请输入站点名称'>
                 </div>
-                <div class='form-group'>
-                  <label class='control-label'>Tooltip field</label>
-                  <input class='form-control' data-toggle='tooltip' placeholder='This is field is disabled!' title='Input tips here'>
+				<div class='form-group'>
+                  <label class='control-label'>站点地址</label>
+                  <input class='form-control' placeholder='请输入站点地址'>
                 </div>
-                <div class='form-group'>
-                  <label class='control-label'>Textarea field</label>
-                  <textarea class='form-control' rows='4'></textarea>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>File input</label>
-                  <input type='file'>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Large field</label>
-                  <input class='form-control input-lg' placeholder='.input-lg' type='text'>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Small field</label>
-                  <input class='form-control input-sm' placeholder='.input-sm' type='text'>
-                </div>
+				<div class='form-group'>
+                  <label class='control-label'>建筑面积</label>
+                  <input class='form-control' placeholder='请输入建筑面积'>
+               </div>
+			   <div class='form-group'>
+                  <label class='control-label'>园区类型</label>
+                  <input class='form-control' placeholder='请输入园区类型'>
+               </div><div class='form-group'>
+                  <label class='control-label'>审核场景</label>
+                  <input class='form-control' placeholder='请输入审核场景'>
+               </div>
+			   <div class='form-group'>
+                  <label class='control-label'>分包商名称</label>
+                  <input class='form-control' placeholder='请输入分包商名称'>
+               </div>
+			   <div class='form-group'>
+                  <label class='control-label'>PMO代表</label>
+                  <input class='form-control' placeholder='请输入PMO代表'>
+              </div>
+			   <div class='form-group'>
+                  <label class='control-label'>审核日期</label>
+                  <input class='form-control' placeholder='请输入审核日期（格式为2000/01/01~2000/04/01）'>
+               </div>
+                
                 <div class='form-group row'>
                   <div class='col-lg-2'>
                     <label class='control-label'>Column sizing</label>
@@ -189,81 +199,25 @@
                     <input class='form-control' placeholder='.col-lg-7' type='text'>
                   </div>
                 </div>
-              </fieldset>
-              <fieldset>
-                <legend>Input Validation States</legend>
-                <div class='form-group has-warning'>
-                  <label class='control-label'>Input field with help</label>
-                  <input class='form-control' placeholder='.has-warning'>
-                  <p class='help-block'>Example block-level help text here.</p>
-                </div>
-                <div class='form-group has-error'>
-                  <label class='control-label'>Input field with help</label>
-                  <input class='form-control' placeholder='.has-error'>
-                  <p class='help-block'>Example block-level help text here.</p>
-                </div>
-                <div class='form-group has-success'>
-                  <label class='control-label'>Input field with help</label>
-                  <input class='form-control' placeholder='.has-success'>
-                  <p class='help-block'>Example block-level help text here.</p>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend>Checkboxes and radios</legend>
-                <div class='form-group'>
-                  <label class='control-label'>Checkbox</label>
-                  <div class='checkbox'>
-                    <input type='checkbox' value=''>
-                    Option one is this and that&mdash;be sure to include why it's great
-                  </div>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Inline checkbox</label>
-                  <br>
-                  <div class='checkbox-inline'>
-                    <input type='checkbox' value=''>
-                    1
-                  </div>
-                  <div class='checkbox-inline'>
-                    <input type='checkbox' value=''>
-                    2
-                  </div>
-                  <div class='checkbox-inline'>
-                    <input type='checkbox' value=''>
-                    3
-                  </div>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Radio</label>
-                  <div class='radio'>
-                    <input checked name='options_radio' type='radio' value='option1'>
-                    Option one is this and that&mdash;be sure to include why it's great
-                    <br>
-                    <input checked name='options_radio' type='radio' value='option2'>
-                    Option two can be something else and selecting it will deselect option one
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset>
                 <legend>Selects</legend>
-                <div class='form-group'>
-                  <label class='control-label'>Single select</label>
-                  <select id="sort" class='form-control'>
-				  {% for post in posts %}
-					<option>{{post}}</option>
-				{%endfor%}             
-                 </select>
-                </div>
-                <div class='form-group'>
-                  <label class='control-label'>Multiple select</label>
-                  <select class='form-control' multiple>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
+                
+                  <label class='control-label'>添加审核任务</label>
+				  <div class='form-group row'>
+				   <div class='col-lg-8'>
+					<select id="sort" class='form-control'>
+						{% for post in posts %}
+							<option>{{post}}</option>
+						{%endfor%}             
+					</select>
+					</div>
+               
+				<div class='col-lg-4'>
+				 <div style="position: relative; height: 80px;">
+					<input class='form-control' id="username" type="text" name="fname" />
+				</div>
+				 </div>
+				</div>
+               
               </fieldset>
               <div class='form-actions'>
                 <button class='btn btn-default' type='submit'>Submit</button>
@@ -278,6 +232,26 @@
 	$("#sort").change(function(){
 			alert('Selected value: ' + $(this).val());
 	});
+    </script>
+	<script type="text/javascript">  					
+	var data = [  
+                    "Google","NetEase", "Sohu", "Sina", "Sogou", "Baidu", "Tencent",   
+                    "Taobao", "Tom", "Yahoo", "JavaEye", "Csdn", "Alipay" ,"alipa","aa","absdf","asdasd","aaqwe"
+                ];  
+
+	$('#username').autocomplete({
+        // serviceUrl: '/autosuggest/service/url',
+        lookup: data,
+        lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+            var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+            return re.test(suggestion.value);
+        },
+       
+        onHint: function (hint) {
+            $('#username-x').val(hint);
+        }
+     
+    });
     </script>
     <!-- Footer -->
     <!-- Javascripts -->  

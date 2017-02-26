@@ -1,8 +1,9 @@
 #coding:utf-8
 from flask import Flask
 from flask import render_template
-from flask import request, session, make_response,Response
-from werkzeug import secure_filename
+from flask import request as flaskrequest
+from flask import session, make_response,Response
+import requests
 import os
 import xlrd
 import json
@@ -33,25 +34,29 @@ def readfromtemplate(filepath="static/Uploads/a.xlsx"):
         else:
             break
     templatemap["categoryList"] = categoryList
-    print(json.dumps(templatemap,ensure_ascii=False))
+    #print(json.dumps(templatemap,ensure_ascii=False))
 	
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-	if request.method == 'GET':
+	if flaskrequest.method == 'GET':
 		return render_template('upload.html')
-	elif request.method == 'POST':
-		f = request.files['file']
+	elif flaskrequest.method == 'POST':
+		f = flaskrequest.files['file']
 		fname = f.filename
 		print(fname)
 		f.save(os.path.join(UPLOAD_FOLDER, fname))
 		readfromtemplate()
+		uploadjson = json.dumps(templatemap,ensure_ascii=False)
+		print(uploadjson)
+		r = requests.post("http://207.46.149.137:21101/webapi/template/save",data=uploadjson.encode('utf-8'))
+		print(r.json())
 		return "upload succeed!"
 	
 @app.route('/login',methods=['POST','GET'])
 def hello_world():
-    print(request.form)
-    a = request.form
-    session['username'] = request.form['username']
+    print(flaskrequest.form)
+    a = flaskrequest.form
+    session['username'] = flaskrequest.form['username']
     if(a["username"] == 'admin' and a['password']=='admin'):
         res = Response('success')
         res.set_cookie(key='username',value = a['username'])
@@ -68,12 +73,12 @@ def createproject():
     posts = []
     for each in os.listdir(UPLOAD_FOLDER):
         posts.append(each)
-    name=request.cookies.get('username')
+    name=flaskrequest.cookies.get('username')
     return render_template('forms.html', username=name,posts=posts)
     
 @app.route('/template',methods=['GET','POST'])
 def dashboard():
-    name=request.cookies.get('username')
+    name=flaskrequest.cookies.get('username')
     posts = []
     for each in os.listdir(UPLOAD_FOLDER):
         posts.append(each)
