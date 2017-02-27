@@ -91,11 +91,11 @@
         <ul id='dock'>
           <li class='active launcher'>
             <i class='icon-dashboard'></i>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="/template">Dashboard</a>
           </li>
           <li class='launcher'>
             <i class='icon-file-text-alt'></i>
-            <a href="forms.html">Forms</a>
+            <a href="/createproject">Forms</a>
           </li>
           <li class='launcher'>
             <i class='icon-table'></i>
@@ -136,8 +136,6 @@
       <section id='tools'>
         <ul class='breadcrumb' id='breadcrumb'>
           <li class='title'>Dashboard</li>
-          <li><a href="#">Lorem</a></li>
-          <li class='active'><a href="#">ipsum</a></li>
         </ul>
         <div id='toolbar'>
           <div class='btn-group'>
@@ -183,14 +181,14 @@
           </div>
           <div class='panel-body'>
             <div class='page-header'>
-              <h4>{{username}}</h4>
+              <h4>模板名：{{templatename}}</h4>
             </div>
   		   
           </div>
 		<div id="json"></div>
 		<script type="text/javascript">
 		var json = {}
-		$.post("http://127.0.0.1:5000/test",
+		$.post("http://127.0.0.1:5000/templates/{{templatename}}",
 		{
 		},
 		function(data,status){

@@ -3,7 +3,7 @@ from flask import Flask
 from flask import render_template
 from flask import request as flaskrequest
 from flask import session, make_response,Response
-import requests
+import urllib.request
 import os
 import xlrd
 import json
@@ -46,10 +46,13 @@ def upload():
 		print(fname)
 		f.save(os.path.join(UPLOAD_FOLDER, fname))
 		readfromtemplate()
-		uploadjson = json.dumps(templatemap,ensure_ascii=False)
-		print(uploadjson)
-		r = requests.post("http://207.46.149.137:21101/webapi/template/save",data=uploadjson.encode('utf-8'))
-		print(r.json())
+		posturl = "http://10.37.1.46:5000/test"
+		req = urllib.request.Request(posturl)
+		req.add_header('Content-Type', 'application/json; charset=utf-8')
+		uploadjson = json.dumps(templatemap,ensure_ascii=False).encode('utf-8')
+		req.add_header('Content-Length',len(uploadjson))
+		print(uploadjson.decode('utf-8'))
+		response = urllib.request.urlopen(req,uploadjson)		
 		return "upload succeed!"
 	
 @app.route('/login',methods=['POST','GET'])
@@ -66,7 +69,14 @@ def hello_world():
 
 @app.route('/template/<name>')
 def hello(name=None):
-    return render_template('templatedetail.html', username=name)
+    username=flaskrequest.cookies.get('username')
+    return render_template('templatedetail.html', templatename=name, username=username)
+
+@app.route('/templates/<name>',methods=['POST'])
+def gettemplate(name=None):
+    readfromtemplate("static/Uploads/"+name)
+    return json.dumps(templatemap,ensure_ascii=False)
+
 
 @app.route('/createproject')
 def createproject():
