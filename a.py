@@ -1,22 +1,23 @@
-#coding:utf-8
+# -*- encoding: utf-8 -*-
 from flask import Flask
 from flask import render_template
 from flask import request as flaskrequest
 from flask import session, make_response,Response
-import urllib.request
+import requests
 import os
 import xlrd
 import json
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/Uploads/'
 templatemap = {}
-def readfromtemplate(filepath="static/Uploads/a.xlsx"):
+def readfromtemplate(filepath):
     templatemap.clear()
     data = xlrd.open_workbook(filepath)
     table = data.sheets()[0]
-    templatemap["templatename"] = table.row_values(0)[1]
-    templatemap["templateshowname"] = table.row_values(1)[1]
+    templatemap["templateExactName"] = table.row_values(0)[1]
+    templatemap["templateShowName"] = table.row_values(1)[1]
     categoryList = []
+    categoryListmap = {}
     i = 3
     while i < table.nrows:
         tempmap = {}
@@ -33,7 +34,8 @@ def readfromtemplate(filepath="static/Uploads/a.xlsx"):
             i = j
         else:
             break
-    templatemap["categoryList"] = categoryList
+    categoryListmap["categoryList"]=categoryList
+    templatemap["categoryList"] = categoryListmap
     #print(json.dumps(templatemap,ensure_ascii=False))
 	
 @app.route('/upload', methods=['GET', 'POST'])
@@ -45,14 +47,13 @@ def upload():
 		fname = f.filename
 		print(fname)
 		f.save(os.path.join(UPLOAD_FOLDER, fname))
-		readfromtemplate()
-		posturl = "http://10.37.1.46:5000/test"
-		req = urllib.request.Request(posturl)
-		req.add_header('Content-Type', 'application/json; charset=utf-8')
+		readfromtemplate("static/Uploads/"+fname)
+		posturl = "http://207.46.149.137:21101/webapi/template/save"
+		headers = {'content-type': 'application/json'}
 		uploadjson = json.dumps(templatemap,ensure_ascii=False).encode('utf-8')
-		req.add_header('Content-Length',len(uploadjson))
 		print(uploadjson.decode('utf-8'))
-		response = urllib.request.urlopen(req,uploadjson)		
+		r = requests.post(posturl, data=uploadjson, headers=headers)
+		print r
 		return "upload succeed!"
 	
 @app.route('/login',methods=['POST','GET'])
@@ -91,7 +92,7 @@ def dashboard():
     name=flaskrequest.cookies.get('username')
     posts = []
     for each in os.listdir(UPLOAD_FOLDER):
-        posts.append(each)
+        posts.append(unicode(each,'utf-8'))
     return render_template('dashboard.html', username=name,posts=posts)
 
 @app.route('/test',methods=['POST','GET'])
