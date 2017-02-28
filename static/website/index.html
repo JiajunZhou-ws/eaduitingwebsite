@@ -67,7 +67,7 @@ function login(){ //函数 login();
 var username = $("#username").val();//取框中的用户名
 var password = $("#password").val();//取框中的密码
 alert("login" + username + password);
-$.post("http://207.46.149.137:5000/login",
+$.post("http://127.0.0.1:5000/login",
 {
   username:username,
   password:password
@@ -75,7 +75,7 @@ $.post("http://207.46.149.137:5000/login",
 function(data,status){
   alert("数据：" + data + "\n状态：" + status);
   if(data == "success")
-    window.location.href = "http://207.46.149.137:5000/template";
+    window.location.href = "http://127.0.0.1:5000/template";
 });
 }
 </script>

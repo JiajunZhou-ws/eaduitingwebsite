@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+#coding:utf-8  
 from flask import Flask
 from flask import render_template
 from flask import request as flaskrequest
@@ -51,9 +51,9 @@ def upload():
 		posturl = "http://207.46.149.137:21101/webapi/template/save"
 		headers = {'content-type': 'application/json'}
 		uploadjson = json.dumps(templatemap,ensure_ascii=False).encode('utf-8')
-		print(uploadjson.decode('utf-8'))
-		r = requests.post(posturl, data=uploadjson, headers=headers)
-		print r
+		print(uploadjson)
+		#r = requests.post(posturl, data=uploadjson, headers=headers)
+		#print r
 		return "upload succeed!"
 	
 @app.route('/login',methods=['POST','GET'])
@@ -92,7 +92,7 @@ def dashboard():
     name=flaskrequest.cookies.get('username')
     posts = []
     for each in os.listdir(UPLOAD_FOLDER):
-        posts.append(unicode(each,'utf-8'))
+        posts.append(each)
     return render_template('dashboard.html', username=name,posts=posts)
 
 @app.route('/test',methods=['POST','GET'])
@@ -102,6 +102,6 @@ def test():
     return json.dumps(templatemap,ensure_ascii=False)
 
 if __name__ == '__main__':
-    app.config.update(SECRET_KEY='123456') 
+    app.config.update(SECRET_KEY='123456')
     app.run(host='0.0.0.0')
     
